@@ -102,7 +102,6 @@ class BreadcrumbComponent {
     ngOnInit() {
         this.router.events.subscribe((data) => {
             if (data instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"]) {
-                // console.log(this.activatedRoute.snapshot)
                 this.routerPath = data.url.substr(1) === "" ? "home/content" : data.url.substr(1);
                 this.routerSplit = this.routerPath.split('/');
                 console.log("Router方式:", this.routerPath);
@@ -421,7 +420,7 @@ class GraphService {
     constructor(http) {
         this.http = http;
         this.httpOption = {}; // for token
-        this.APIURL = `http://supergit.asuscomm.com:4000`;
+        this.APIURL = `http://supergit.cn:6000/`;
         this.host = '/api/';
     }
     /***
@@ -526,10 +525,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _word_cloud_word_cloud_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./word-cloud/word-cloud.component */ "vZbB");
 /* harmony import */ var _line_graph_line_graph_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./line-graph/line-graph.component */ "q6VA");
 /* harmony import */ var _heat_map_heat_map_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./heat-map/heat-map.component */ "qfjz");
-/* harmony import */ var _force_graph_force_graph_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./force-graph/force-graph.component */ "yHUG");
-/* harmony import */ var _force_graph_td_force_graph_td_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./force-graph-td/force-graph-td.component */ "4jEQ");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
+/* harmony import */ var _force_graph_td_force_graph_td_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./force-graph-td/force-graph-td.component */ "4jEQ");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 
@@ -545,23 +542,19 @@ const routes = [
     },
     {
         path: 'NodeGraph',
-        component: _force_graph_force_graph_component__WEBPACK_IMPORTED_MODULE_5__["ForceGraphComponent"],
+        component: _force_graph_td_force_graph_td_component__WEBPACK_IMPORTED_MODULE_5__["ForceGraphTDComponent"],
     },
     {
         path: 'WordCloud',
         component: _word_cloud_word_cloud_component__WEBPACK_IMPORTED_MODULE_2__["WordCloudComponent"],
     },
     {
-        path: 'StackGraph',
+        path: 'LineGraph',
         component: _line_graph_line_graph_component__WEBPACK_IMPORTED_MODULE_3__["LineGraphComponent"],
     },
     {
         path: 'HeatMap',
         component: _heat_map_heat_map_component__WEBPACK_IMPORTED_MODULE_4__["HeatMapComponent"],
-    },
-    {
-        path: '3d',
-        component: _force_graph_td_force_graph_td_component__WEBPACK_IMPORTED_MODULE_6__["ForceGraphTDComponent"]
     },
     {
         path: '**',
@@ -571,9 +564,9 @@ const routes = [
 class GraphRoutingModule {
 }
 GraphRoutingModule.ɵfac = function GraphRoutingModule_Factory(t) { return new (t || GraphRoutingModule)(); };
-GraphRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({ type: GraphRoutingModule });
-GraphRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](GraphRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+GraphRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineNgModule"]({ type: GraphRoutingModule });
+GraphRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵsetNgModuleScope"](GraphRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 
 /***/ }),
@@ -865,12 +858,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var echarts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! echarts */ "MT78");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _graph_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../graph.service */ "JoXy");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
 class LineGraphComponent {
-    constructor(service) {
+    constructor(service, router) {
         this.service = service;
+        this.router = router;
     }
     ngOnInit() {
         this.chart = echarts__WEBPACK_IMPORTED_MODULE_0__["init"](document.getElementById('line'));
@@ -944,7 +940,7 @@ class LineGraphComponent {
         });
     }
 }
-LineGraphComponent.ɵfac = function LineGraphComponent_Factory(t) { return new (t || LineGraphComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"])); };
+LineGraphComponent.ɵfac = function LineGraphComponent_Factory(t) { return new (t || LineGraphComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_graph_service__WEBPACK_IMPORTED_MODULE_2__["GraphService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"])); };
 LineGraphComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: LineGraphComponent, selectors: [["app-line-graph"]], decls: 1, vars: 0, consts: [["id", "line"]], template: function LineGraphComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "div", 0);
     } }, styles: ["#line[_ngcontent-%COMP%] {\n  position: relative;\n  height: 238px;\n  width: 430px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxsaW5lLWdyYXBoLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxhQUFBO0VBQ0EsWUFBQTtBQUNGIiwiZmlsZSI6ImxpbmUtZ3JhcGguY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbGluZSB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIGhlaWdodDogMjM4cHg7XHJcbiAgd2lkdGg6IDQzMHB4O1xyXG59XHJcbiJdfQ== */"] });
@@ -1155,53 +1151,53 @@ class WordCloudComponent {
             { "value": 133, "name": "32" },];
     }
     ngOnInit() {
-        // this.service.getWordCloud({'num':"600"}).subscribe((data) => {
-        //   const words = []
-        //   // console.log(data.climateAU_MP_Count)
-        //   for (let word of data.climateAU_MP_Count) {
-        //     word = {"name":word._id,"value":word.value}
-        //     words.push(word)
-        //   }
-        //   this.data = words
-        this.chart = echarts__WEBPACK_IMPORTED_MODULE_1__["init"](document.getElementById('main'));
-        this.chart.setOption({
-            backgroundColor: '#fff',
-            tooltip: {
-                show: false
-            },
-            series: [{
-                    type: 'wordCloud',
-                    size: ['9%', '50%'],
-                    sizeRange: [10, 30],
-                    textRotation: [0, 45, 90, -45],
-                    rotationRange: [-45, 90],
-                    gridSize: 8,
-                    shape: 'diamond',
-                    drawOutOfBound: false,
-                    autoSize: {
-                        enable: true,
-                        minSize: 6
-                    },
-                    textStyle: {
-                        normal: {
-                            color: () => {
-                                return 'rgb(' + [
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160)
-                                ].join(',') + ')';
+        this.service.getWordCloud({ 'num': "600" }).subscribe((data) => {
+            const words = [];
+            // console.log(data.climateAU_MP_Count)
+            for (let word of data.climateAU_MP_Count) {
+                word = { "name": word._id, "value": word.value };
+                words.push(word);
+            }
+            this.data = words;
+            this.chart = echarts__WEBPACK_IMPORTED_MODULE_1__["init"](document.getElementById('main'));
+            this.chart.setOption({
+                backgroundColor: '#fff',
+                tooltip: {
+                    show: false
+                },
+                series: [{
+                        type: 'wordCloud',
+                        size: ['9%', '50%'],
+                        sizeRange: [10, 30],
+                        textRotation: [0, 45, 90, -45],
+                        rotationRange: [-45, 90],
+                        gridSize: 8,
+                        shape: 'diamond',
+                        drawOutOfBound: false,
+                        autoSize: {
+                            enable: true,
+                            minSize: 6
+                        },
+                        textStyle: {
+                            normal: {
+                                color: () => {
+                                    return 'rgb(' + [
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160)
+                                    ].join(',') + ')';
+                                }
+                            },
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(0, 0, 0, 0.15)'
                             }
                         },
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.15)'
-                        }
-                    },
-                    data: this.testData,
-                }]
+                        data: this.data,
+                    }]
+            });
+            this.getClickValue();
         });
-        this.getClickValue();
-        // })
     }
     getClickValue() {
         this.chart.on('click', function (word) {

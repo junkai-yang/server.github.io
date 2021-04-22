@@ -68,7 +68,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ContentComponent_ng_template_18_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "i", 8);
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "i", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ContentComponent_ng_template_18_Template_i_click_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.linkToLine($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 class ContentComponent {
     constructor() {
@@ -83,9 +86,15 @@ class ContentComponent {
         console.log(event);
         this.param_WordCloud = event.param.name;
     }
+    linkToLine(event) {
+        event.stopPropagation();
+        // console.log('work')
+        const domLine = document.getElementById('line');
+        console.log(domLine.parentNode.removeChild(domLine));
+    }
 }
 ContentComponent.ɵfac = function ContentComponent_Factory(t) { return new (t || ContentComponent)(); };
-ContentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContentComponent, selectors: [["app-content"]], decls: 20, vars: 14, consts: [[1, "row", "mb-2"], [1, "col-lg-6"], ["nzExpandIconPosition", "right", 3, "nzGhost"], [3, "nzActive", "nzHeader", "nzExtra"], [3, "nzActive", "nzHeader"], [3, "msg"], [3, "WordCloudParam"], ["extraTpl", ""], ["nz-icon", "", "nzType", "link", "nzTheme", "outline"]], template: function ContentComponent_Template(rf, ctx) { if (rf & 1) {
+ContentComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContentComponent, selectors: [["app-content"]], decls: 20, vars: 14, consts: [[1, "row", "mb-2"], [1, "col-lg-6"], ["nzExpandIconPosition", "right", 3, "nzGhost"], [3, "nzActive", "nzHeader", "nzExtra"], [3, "nzActive", "nzHeader"], [3, "msg"], [3, "WordCloudParam"], ["extraTpl", ""], ["nz-icon", "", "nzType", "link", "nzTheme", "outline", 3, "click"]], template: function ContentComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "nz-collapse", 2);
