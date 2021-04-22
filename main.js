@@ -420,14 +420,13 @@ class GraphService {
     constructor(http) {
         this.http = http;
         this.httpOption = {}; // for token
-        this.APIURL = `http://supergit.cn:6000/`;
         this.host = '/api/';
     }
     /***
      * get WordCloud
      * ***/
     getWordCloud(info) {
-        const url = this.host + `/climateAU_MP/climateAU_MP_Count`;
+        const url = this.host + `climateAU_MP/climateAU_MP_Count`;
         return this.http.post(url, info);
     }
 }
