@@ -417,17 +417,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class GraphService {
+    // host = '/api/'
     constructor(http) {
         this.http = http;
         this.httpOption = {}; // for token
         this.API = `https://supergit.cn:4000/`;
-        this.host = '/api/';
     }
     /***
      * get WordCloud
      * ***/
     getWordCloud(info) {
-        const url = this.host + `climateAU_MP/climateAU_MP_Count`;
+        const url = this.API + `climateAU_MP/climateAU_MP_Count`;
         return this.http.post(url, info);
     }
 }
